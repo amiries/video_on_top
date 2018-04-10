@@ -10,7 +10,7 @@ import java.awt.Font;
 
 public class videocanvas {
 
-	private JFrame frame;
+	private JFrame frmPatientVideo;
 	private static int top;
 	private static int left;
 	private static int width;
@@ -23,33 +23,32 @@ public class videocanvas {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					videocanvas window = new videocanvas();
-					window.frame.setVisible(true);
+
 					int equal;
 					
 		            for (String arg : args) {
 		            	
 		            	equal = arg.indexOf("=");
 		            	String command = arg.substring(0, equal);
-		            	JOptionPane.showMessageDialog(null, "command=" + command);
 		            	switch (command) {
 		            	case "top": 
 		            		top = Integer.parseInt(arg.substring(equal+1, arg.length()));
 		            		break;
 		            	case "left":
 		            		left = Integer.parseInt(arg.substring(equal+1, arg.length()));
-		            		JOptionPane.showMessageDialog(null, "left=" + left);
 		            		break;
 		            	case "hight":
 		            		hight = Integer.parseInt(arg.substring(equal+1, arg.length()));
-		            		JOptionPane.showMessageDialog(null, "hight=" + hight);
 		            		break;
 		            	case "width":
 		            		width = Integer.parseInt(arg.substring(equal+1, arg.length()));
-		            		JOptionPane.showMessageDialog(null, "width=" + width);
 		            		break;
 		            	}
 		            }
+
+					videocanvas window = new videocanvas();
+					window.frmPatientVideo.setBounds(left, top, width, hight);
+					window.frmPatientVideo.setVisible(true);
 					
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -70,16 +69,18 @@ public class videocanvas {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(top, left, width, hight);
+		frmPatientVideo = new JFrame();
+		frmPatientVideo.setTitle("Patient video");
+		frmPatientVideo.setAlwaysOnTop(true);
+		frmPatientVideo.setBounds(left, top, 219, 193);
 		//frame.setBounds(100, 100, 584, 403);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmPatientVideo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPatientVideo.getContentPane().setLayout(null);
 		
 		JLabel lblThisIsThe = new JLabel("This is the video");
 		lblThisIsThe.setFont(new Font("Tahoma", Font.PLAIN, 43));
 		lblThisIsThe.setBounds(20, 11, 384, 229);
-		frame.getContentPane().add(lblThisIsThe);
+		frmPatientVideo.getContentPane().add(lblThisIsThe);
 	}
 
 }
